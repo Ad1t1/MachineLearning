@@ -1,0 +1,42 @@
+# Remove commas and convert 'Price in USD' to numeric
+sport_car_data$Price..in.USD. <- gsub(",", "", sport_car_data$Price..in.USD.)
+sport_car_data$Price..in.USD. <- as.numeric(sport_car_data$Price..in.USD.)
+
+# Check summary of cleaned price data
+summary(sport_car_data$Price..in.USD.)
+
+# View dataset dimensions
+dim(sport_car_data)
+
+# Examine structure and summary stats
+str(sport_car_data)
+summary(sport_car_data)
+
+# Convert character columns to numeric
+sport_car_data$Horsepower <- as.numeric(sport_car_data$Horsepower)
+sport_car_data$Torque..lb.ft. <- as.numeric(sport_car_data$Torque..lb.ft.)
+sport_car_data$X0.60.MPH.Time..seconds. <- as.numeric(sport_car_data$X0.60.MPH.Time..seconds.)
+sport_car_data$Engine.Size..L. <- as.numeric(sport_car_data$Engine.Size..L.)
+
+# Verify structure and check for missing values
+str(sport_car_data)
+colSums(is.na(sport_car_data))
+
+# Replace missing values with column means
+sport_car_data$Horsepower[is.na(sport_car_data$Horsepower)] <- mean(sport_car_data$Horsepower, na.rm = TRUE)
+sport_car_data$Torque..lb.ft.[is.na(sport_car_data$Torque..lb.ft.)] <- mean(sport_car_data$Torque..lb.ft., na.rm = TRUE)
+sport_car_data$X0.60.MPH.Time..seconds.[is.na(sport_car_data$X0.60.MPH.Time..seconds.)] <- mean(sport_car_data$X0.60.MPH.Time..seconds., na.rm = TRUE)
+sport_car_data$Engine.Size..L.[is.na(sport_car_data$Engine.Size..L.)] <- mean(sport_car_data$Engine.Size..L., na.rm = TRUE)
+
+# Verify all missing values are handled
+colSums(is.na(sport_car_data))
+
+# Load library for multicollinearity check
+library(car)
+
+# Fit linear model and check VIF values
+lm_model <- lm(Engine.Size..L. ~ Horsepower + Torque..lb.ft. + X0.60.MPH.Time..seconds. + Year + Price..in.USD.,
+               data = sport_car_data)
+vif_values <- vif(lm_model)
+print("Variance Inflation Factor (VIF) values:")
+print(vif_values)

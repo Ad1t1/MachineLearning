@@ -53,6 +53,13 @@ Bubble plot: Price vs. Horsepower (color = Torque, size = Engine Size).
 
 Correlation heatmap for numeric variables. 
 
+![MLRepoFR](/images/EngineSizeGraph.png)
+![MLRepoFR](/images/EngineSizevs.Horsepower.png)
+![MLRepoFR](/images/Horsepowervs.Price.png)
+![MLRepoFR](/images/EngineSizeByYear.png)
+![MLRepoFR](/images/CorrelationMatrix.png)
+![MLRepoFR](/images/CarTypesAcceleration.png)
+
 # Key Takeaways:
 Higher horsepower often translates into higher price and larger engines.
 
@@ -77,20 +84,20 @@ X0.60.MPH.Time..seconds., Price..in.USD.
 
 ## Libaries Used:
 
-library(tidyverse)
-library(caret)
-library(recipes)
-library(rsample)
-library(parsnip)
-library(workflows)
-library(tune)
-library(yardstick)
-library(randomForest)
-library(e1071)
-library(xgboost)
-library(corrplot)
-library(ggplot2)
-library(car)
+- library(tidyverse)
+- library(caret)
+- library(recipes)
+- library(rsample)
+- library(parsnip)
+- library(workflows)
+- library(tune)
+- library(yardstick)
+- library(randomForest)
+- library(e1071)
+- library(xgboost)
+- library(corrplot)
+- library(ggplot2)
+- library(car)
 
 ## Next Steps:
 
@@ -104,9 +111,3 @@ Hyperparameter tuning with tune and caret.
 
 Evaluation using RMSE, R², and MAE.
 
-![MLRepoFR](/images/EngineSizeGraph.png)
-![MLRepoFR](/images/EngineSizevs.Horsepower.png)
-![MLRepoFR](/images/Horsepowervs.Price.png)
-![MLRepoFR](/images/EngineSizeByYear.png)
-![MLRepoFR](/images/CorrelationMatrix.png)
-![MLRepoFR](/images/CarTypesAcceleration.png)
