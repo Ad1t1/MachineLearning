@@ -104,9 +104,9 @@ Hyperparameter tuning with tune and caret.
 
 Evaluation using RMSE, R², and MAE.
 
-!]MLRepoFR](/images/EngineSizeGraph.png)
-!]MLRepoFR](/images/EngineSizevs.Horsepower.png)
-!]MLRepoFR](/images/Horsepowervs.Price.png)
-!]MLRepoFR](/images/EngineSizeByYear.png)
-!]MLRepoFR](/images/CorrelationMatrix.png)
-!]MLRepoFR](/images/CarTypesAcceleration.png)
+![MLRepoFR](/images/EngineSizeGraph.png)
+![MLRepoFR](/images/EngineSizevs.Horsepower.png)
+![MLRepoFR](/images/Horsepowervs.Price.png)
+![MLRepoFR](/images/EngineSizeByYear.png)
+![MLRepoFR](/images/CorrelationMatrix.png)
+![MLRepoFR](/images/CarTypesAcceleration.png)
