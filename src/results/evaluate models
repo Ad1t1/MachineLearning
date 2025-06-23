@@ -1,0 +1,29 @@
+# Predict all
+ridge_preds <- predict(ridge_results, new_data = test_data)$.pred
+elastic_net_preds <- predict(elastic_net_results, new_data = test_data)$.pred
+svm_preds <- predict(svm_results, new_data = test_data)$.pred
+rf_preds <- predict(rf_results, new_data = test_data)$.pred
+
+# DataFrames
+ridge_df <- data.frame(truth = test_data$Engine.Size..L., prediction = ridge_preds)
+elastic_net_df <- data.frame(truth = test_data$Engine.Size..L., prediction = elastic_net_preds)
+svm_df <- data.frame(truth = test_data$Engine.Size..L., prediction = svm_preds)
+rf_df <- data.frame(truth = test_data$Engine.Size..L., prediction = rf_preds)
+
+# RMSEs
+ridge_rmse <- rmse(ridge_df, truth = truth, estimate = prediction)
+elastic_net_rmse <- rmse(elastic_net_df, truth = truth, estimate = prediction)
+svm_rmse <- rmse(svm_df, truth = truth, estimate = prediction)
+rf_rmse <- sqrt(mean((rf_df$truth - rf_df$prediction)^2))
+
+rmse_results <- data.frame(
+  Model = c("Ridge", "Elastic Net", "SVM", "Random Forest"),
+  RMSE = c(ridge_rmse$.estimate, elastic_net_rmse$.estimate, svm_rmse$.estimate, rf_rmse)
+)
+
+# Plot
+ggplot(rmse_results, aes(x = Model, y = RMSE, fill = Model)) +
+  geom_bar(stat = "identity", show.legend = FALSE) +
+  theme_minimal() +
+  labs(title = "Model RMSE Comparison", x = "Model", y = "RMSE") +
+  scale_fill_manual(values = c("Ridge" = "blue", "Elastic Net" = "black", "SVM" = "darkblue", "Random Forest" = "red"))
