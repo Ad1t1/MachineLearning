@@ -1,0 +1,16 @@
+numeric_data <- sport_car_data %>% select(where(is.numeric))
+
+correlations <- numeric_data %>%
+  select(-Engine.Size..L.) %>%
+  summarise(across(everything(), ~ cor(.x, numeric_data$Engine.Size..L., use = "complete.obs"))) %>%
+  pivot_longer(everything(), names_to = "Predictor", values_to = "Correlation") %>%
+  mutate(abs_corr = abs(Correlation)) %>%
+  arrange(desc(abs_corr))
+
+ggplot(correlations, aes(x = reorder(Predictor, abs_corr), y = abs_corr)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Variable Importance (Correlation w/ Engine Size)",
+       x = "Predictor",
+       y = "Absolute Correlation")
