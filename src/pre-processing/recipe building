@@ -1,0 +1,25 @@
+# Load necessary libraries
+library(tidymodels)
+
+# Set seed for reproducibility
+set.seed(200)
+
+# Split the data into 70% training and 30% testing, stratified by Engine Size
+split <- initial_split(sport_car_data, prop = 0.7, strata = Engine.Size..L.)
+train_data <- training(split)
+test_data <- testing(split)
+
+# Check proportion of training and testing data
+nrow(train_data) / nrow(sport_car_data)
+nrow(test_data) / nrow(sport_car_data)
+
+# Build the recipe with preprocessing steps
+car_recipe <- recipe(Engine.Size..L. ~ Car.Make + Car.Model + Year + Horsepower + Torque..lb.ft. + X0.60.MPH.Time..seconds.,
+                     data = sport_car_data) %>%
+  step_novel(all_nominal(), -all_outcomes()) %>%      # Handle unseen factor levels
+  step_dummy(all_nominal(), -all_outcomes()) %>%      # One-hot encode categorical variables
+  step_zv(all_predictors()) %>%                       # Remove zero variance predictors
+  step_normalize(all_numeric(), -all_outcomes())      # Normalize numeric predictors
+
+# Create 10-fold cross-validation folds, stratified on Engine Size
+car_folds <- vfold_cv(train_data, v = 10, strata = Engine.Size..L.)
